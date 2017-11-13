@@ -100,24 +100,4 @@ public abstract class Cell {
         this.content = content;
     }
 
-    /**
-     * Defines how cell reacts to left mouse click.
-     */
-    public void leftClickAction() {
-
-    }
-
-    /**
-     * Defines how cell reacts to right mouse click.
-     */
-    public void rightClickAction() {
-
-    }
-
-    /**
-     * Defines how cell reacts to left and right mouse click.
-     */
-    public void leftRightClickAction() {
-
-    }
 }
