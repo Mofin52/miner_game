@@ -1,5 +1,8 @@
 package ru.avelikorechin.miner.cells;
 
+import ru.avelikorechin.miner.cellActions.CellActions;
+import ru.avelikorechin.miner.cellActions.EmptyActions;
+
 /**
  * Class describing empty cell behaviour.
  * @author Alexander Velikorechin
@@ -7,7 +10,10 @@ package ru.avelikorechin.miner.cells;
  */
 
 public class EmptyCell extends Cell {
-
+    /**
+     * Bomb action lib.
+     */
+    private CellActions cellActions = new EmptyActions();
     /**
      * Constructor of cell.
      * @param column column of cell on board

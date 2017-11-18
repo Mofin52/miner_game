@@ -1,5 +1,8 @@
 package ru.avelikorechin.miner.cells;
 
+import ru.avelikorechin.miner.cellActions.BombActions;
+import ru.avelikorechin.miner.cellActions.CellActions;
+
 /**
  * Class describing cell with bomb behaviour.
  * @author Alexander Velikorechin
@@ -7,6 +10,10 @@ package ru.avelikorechin.miner.cells;
  */
 
 public class BombCell extends Cell {
+    /**
+     * Bomb action lib.
+     */
+    private CellActions cellActions = new BombActions();
 
     /**
      * Constructor of cell.
@@ -16,21 +23,5 @@ public class BombCell extends Cell {
     public BombCell(int row, int column) {
         super(row, column);
         this.content = "*";
-    }
-
-    /**
-     * Returns content of cell.
-     * @return content of cell
-     */
-    public String getContent(){
-        return content;
-    }
-
-    /**
-     * Sets content of cell.
-     * @param content content of cell
-     */
-    public void setContent(String content){
-        this.content = content;
     }
 }

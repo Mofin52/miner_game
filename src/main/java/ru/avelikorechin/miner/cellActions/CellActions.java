@@ -110,5 +110,4 @@ public abstract class CellActions {
      * @param cells array of cells
      */
     abstract void leftRightClickAction(Cell cell, Cell[][] cells);
-    
 }

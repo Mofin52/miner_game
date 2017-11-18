@@ -1,5 +1,7 @@
 package ru.avelikorechin.miner.cells;
 
+import ru.avelikorechin.miner.cellActions.CellActions;
+
 /**
  * Interface to describe all types of cells on board.
  * @author Alexander Velikorechin
@@ -24,7 +26,10 @@ public abstract class Cell {
      * Content of cell.
      */
     String content;
-
+    /**
+     * Cell actions library.
+     */
+    CellActions actionLibrary;
     /**
      * Constructor for empty cell.
      * @param column column of cell on board
@@ -98,6 +103,22 @@ public abstract class Cell {
      */
     public void setContent(String content){
         this.content = content;
+    }
+
+    /**
+     * Returns current actionLibrary.
+     * @return action library
+     */
+    public CellActions getActionLibrary () {
+        return this.actionLibrary;
+    }
+
+    /**
+     * Sets new actionLibrary.
+     * @param acts action library
+     */
+    public void setActionLibrary (CellActions acts) {
+        this.actionLibrary = acts;
     }
 
 }
