@@ -96,6 +96,12 @@ public class Board {
         }
     }
 
+    /**
+     * Method counts bomb around particular cell.
+     * @param row row of cell to count around
+     * @param col column of cell to count around
+     * @return
+     */
     private String countBombsAround(int row, int col) {
         int counter = 0;
         for (int i = -1; i <= 1 ; i++){

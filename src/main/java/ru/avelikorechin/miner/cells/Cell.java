@@ -17,7 +17,7 @@ public abstract class Cell {
      */
     int row;
     /**
-     * Status of cell. May be hidden, opened or flagged.
+     * Status of cell. May be hidden, pushed, opened or flagged.
      */
     String state;
     /**
@@ -49,7 +49,7 @@ public abstract class Cell {
      * @param newState cell state
      */
     public void setState(String newState) {
-
+        this.state = newState;
     }
 
     /**
