@@ -29,7 +29,6 @@ public abstract class CellActions {
             cellState = "hidden";
             ui.redrawCellImage(cellState, cell.getContent(), ui.getCellsView()[cell.getRow()][cell.getColumn()]);
         }
-
     }
 
     /**

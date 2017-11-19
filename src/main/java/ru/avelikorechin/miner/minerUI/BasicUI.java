@@ -5,11 +5,13 @@ import ru.avelikorechin.miner.cells.Cell;
 import javax.imageio.ImageIO;
 import javax.swing.JFrame;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Image;
 
+import java.awt.event.MouseListener;
 import java.io.File;
 import java.io.IOException;
 
@@ -112,6 +114,32 @@ public class BasicUI {
             e.printStackTrace();
         }
         cellView.setIcon(new ImageIcon(image));
+    }
+
+    /**
+     * Method invokes when we need to stop the game.
+     * First in opens all the cells
+     * Then in removes mouse listener from their graphical model to make them inactive
+     * Finally the message "Game over" is shown
+     */
+    public void gameOver() {
+        for (Cell[] cellRow : cells) {
+            for (Cell cell : cellRow) {
+                discloseCells(cell);
+                CellModel cellModel = cellsView[cell.getRow()][cell.getColumn()];
+                MouseListener listener = cellModel.getMouseListeners()[0];
+                cellModel.removeMouseListener(listener);
+            }
+        }
+        JOptionPane.showMessageDialog(null, "Game Over");
+    }
+
+    /**
+     * Method shows given cells.
+     * @param cell cell to open
+     */
+    private void discloseCells(final Cell cell) {
+        redrawCellImage("opened", cell.getContent(), cellsView[cell.getRow()][cell.getColumn()]);
     }
 
     /**
