@@ -19,21 +19,21 @@ public class EmptyActions extends CellActions {
      * Action performed on right mouse button click.
      *
      * @param cell  cell clicked
-     * @param cells array of cells
+     * @param ui ui of app
      */
     @Override
-    public void leftClickAction(Cell cell, BasicUI ui, Cell[][] cells) {
+    public void leftClickAction(Cell cell, BasicUI ui) {
         //TODO check method work
         String cellState = cell.getState();
         if (cellState.equals("hidden")) {
             cell.setState("opened");
             ui.getCellsView()[cell.getRow()][cell.getColumn()].redrawCellImage("opened", cell.getContent());
-            List<Cell> cellsAround = getHiddenCellsAround(cell, cells);
+            List<Cell> cellsAround = getHiddenCellsAround(cell, ui.getCells());
             for (Cell elem : cellsAround) {
                 if (elem instanceof EmptyCell) {
-                    leftClickAction(elem, ui, cells);
+                    leftClickAction(elem, ui);
                 } else if (elem instanceof NumberCell) {
-                    elem.getActionLibrary().leftClickAction(elem, ui, cells);
+                    elem.getActionLibrary().leftClickAction(elem, ui);
                 }
             }
 

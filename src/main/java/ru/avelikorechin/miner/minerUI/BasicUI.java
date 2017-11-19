@@ -81,7 +81,7 @@ public class BasicUI {
                 label.setBounds(cellWidth*j,cellHeight*i,cellWidth,cellHeight);
                 label.setBackground(Color.BLACK);
                 label.setVisible(true);
-                label.addMouseListener(new ClicksListener(cells, this));
+                label.addMouseListener(new ClicksListener(this));
                 frame.getContentPane().add(label);
                 this.cellsView[i][j] = label;
             }
@@ -94,5 +94,12 @@ public class BasicUI {
      */
     public CellModel[][] getCellsView () {
         return this.cellsView;
+    }
+    /**
+     * Getter for cells.
+     * @return array of cells
+     */
+    public Cell[][] getCells() {
+        return this.cells;
     }
 }

@@ -35,9 +35,8 @@ public abstract class CellActions {
      * Action performed on left mouse button click.
      * @param cell cell clicked
      * @param ui app ui
-     * @param cells array of cells
      */
-    public void leftClickAction(Cell cell, BasicUI ui, Cell[][] cells) {
+    public void leftClickAction(Cell cell, BasicUI ui) {
         String cellState = cell.getState();
         if (cellState.equals("hidden")) {
             cell.setState("opened");
