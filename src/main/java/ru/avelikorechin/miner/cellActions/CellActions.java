@@ -1,7 +1,8 @@
 package ru.avelikorechin.miner.cellActions;
 
+import ru.avelikorechin.miner.StartUI;
 import ru.avelikorechin.miner.cells.Cell;
-import ru.avelikorechin.miner.minerUI.BasicUI;
+import ru.avelikorechin.miner.minerUI.UIController;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,15 +19,15 @@ public abstract class CellActions {
      * @param cell cell clicked
      * @param ui ui of application
      */
-    public void rightClickAction(final Cell cell, final BasicUI ui) {
+    public void rightClickAction(final Cell cell, final UIController ui) {
         String cellState = cell.getState();
         if (cellState.equals("hidden")) {
-            cell.setState("flagged");
             cellState = "flagged";
+            cell.setState(cellState);
             ui.redrawCellImage(cellState, cell.getContent(), ui.getCellsView()[cell.getRow()][cell.getColumn()]);
         } else if (cellState.equals("flagged")) {
-            cell.setState("hidden");
             cellState = "hidden";
+            cell.setState(cellState);
             ui.redrawCellImage(cellState, cell.getContent(), ui.getCellsView()[cell.getRow()][cell.getColumn()]);
         }
     }
@@ -36,13 +37,16 @@ public abstract class CellActions {
      * @param cell cell clicked
      * @param ui app ui
      */
-    public void leftClickAction(final Cell cell, final BasicUI ui) {
+    public void leftClickAction(final Cell cell, final UIController ui) {
         String cellState = cell.getState();
         if (cellState.equals("hidden")) {
             cell.setState("opened");
             cellState = "opened";
             ui.redrawCellImage(cellState, cell.getContent(), ui.getCellsView()[cell.getRow()][cell.getColumn()]);
+            ui.setCellsLeft(ui.getCellsLeft() - 1);
+            System.out.println(ui.getCellsLeft());
         }
+        isGameWon(ui);
     }
 
     /**
@@ -81,6 +85,25 @@ public abstract class CellActions {
         List<Cell> hiddenCellsAround = getCellsAround(cell, cells);
         hiddenCellsAround.removeIf(c -> !c.getState().equals("hidden"));
         return hiddenCellsAround;
+    }
+
+    /**
+     * Method changes ammount of flags set correctly.
+     * @param delta +1 or -1
+     * @param ui user interface of app
+     */
+    protected void changeControlCellsCount(final int delta, final UIController ui) {
+        ui.setCorrectFlags(ui.getCorrectFlags() + delta);
+    }
+
+    /**
+     * Checks whether game is won or not.
+     * @param ui ui of an app
+     */
+    protected void isGameWon(final UIController ui) {
+        if (ui.getCellsLeft() == StartUI.BOMBS) {
+            ui.gameWon();
+        }
     }
 
 }

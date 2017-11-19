@@ -3,7 +3,7 @@ package ru.avelikorechin.miner.cellActions;
 import ru.avelikorechin.miner.cells.Cell;
 import ru.avelikorechin.miner.cells.EmptyCell;
 import ru.avelikorechin.miner.cells.NumberCell;
-import ru.avelikorechin.miner.minerUI.BasicUI;
+import ru.avelikorechin.miner.minerUI.UIController;
 
 import java.util.List;
 
@@ -22,14 +22,14 @@ public class EmptyActions extends CellActions {
      * @param ui ui of app
      */
     @Override
-    public final void leftClickAction(final Cell cell, final BasicUI ui) {
-        //TODO check method work
+    public final void leftClickAction(final Cell cell, final UIController ui) {
         String cellState = cell.getState();
         if (cellState.equals("hidden")) {
             cell.setState("opened");
             ui.redrawCellImage("opened",
                     cell.getContent(),
                     ui.getCellsView()[cell.getRow()][cell.getColumn()]);
+            ui.setCellsLeft(ui.getCellsLeft() - 1);
             List<Cell> cellsAround = getHiddenCellsAround(cell, ui.getCells());
             for (Cell elem : cellsAround) {
                 if (elem instanceof EmptyCell) {
@@ -38,8 +38,8 @@ public class EmptyActions extends CellActions {
                     elem.getActionLibrary().leftClickAction(elem, ui);
                 }
             }
-
         }
+        isGameWon(ui);
     }
 
 }

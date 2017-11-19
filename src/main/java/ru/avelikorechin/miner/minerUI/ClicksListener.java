@@ -15,7 +15,7 @@ public class ClicksListener implements MouseListener {
     /**
      * Ui to interact with.
      */
-    private BasicUI ui;
+    private UIController ui;
     /**
      * Constant for left mouse button.
      */
@@ -28,7 +28,7 @@ public class ClicksListener implements MouseListener {
      * Constructor for clicksListener.
      * @param ui cell views required for click library work
      */
-    public ClicksListener(final BasicUI ui) {
+    public ClicksListener(final UIController ui) {
         this.ui = ui;
     }
     /**
@@ -37,7 +37,7 @@ public class ClicksListener implements MouseListener {
      */
     @Override
     public final void mouseClicked(final MouseEvent mouseEvent) {
-        CellModel objectClicked = (CellModel) mouseEvent.getSource();
+        CellView objectClicked = (CellView) mouseEvent.getSource();
         Cell cellClicked = ui.getCells()[objectClicked.getRow()][objectClicked.getColumn()];
         int buttonClicked = mouseEvent.getButton();
         if (buttonClicked == LMB) {

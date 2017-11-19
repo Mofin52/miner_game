@@ -1,6 +1,6 @@
 package ru.avelikorechin.miner;
 
-import ru.avelikorechin.miner.minerUI.BasicUI;
+import ru.avelikorechin.miner.minerUI.UIController;
 
 /**
  * Class responsible for game launch.
@@ -9,25 +9,29 @@ import ru.avelikorechin.miner.minerUI.BasicUI;
  */
 public class StartUI {
     /**
-     * Const for num of rows on board.
-     */
-    private static final int ROWS = 10;
-    /**
-     * Const for num of columns on board.
-     */
-    private static final int COLUMNS = 10;
-    /**
-     * Const for num of bombs on board.
-     */
-    private static final int BOMBS = 10;
-    /**
      * Const for cell width.
      */
-    private static final int CELL_WIDTH = 16;
+    public static final int CELL_WIDTH = 16;
     /**
      * Const for cell height.
      */
-    private static final int CELL_HEIGHT = 16;
+    public static final int CELL_HEIGHT = 16;
+    /**
+     * Const for num of bombs on board.
+     */
+    public static final int BOMBS = 5;
+    /**
+     * Const for num of rows on board.
+     */
+    public static final int ROWS = 10;
+    /**
+     * Const for num of columns on board.
+     */
+    public static final int COLUMNS = 10;
+    /**
+     * Const for num of cells on board.
+     */
+    public static final int CELLS_ON_BOARD = ROWS * COLUMNS;
     /**
      * Starting point of app.
      * @param args arguments array
@@ -35,16 +39,7 @@ public class StartUI {
     public static void main(String[] args) {
         Board board = new Board(ROWS, COLUMNS, BOMBS);
         board.fillBoard();
-        for (int i = 0; i < board.getCells().length; i++) {
-            System.out.print(i + ": ");
-            for (int j = 0; j < board.getCells()[i].length; j++) {
-                String content = board.getCells()[i][j].getContent();
-                content = content.equals("") ? " " : content;
-                System.out.print(content);
-            }
-            System.out.println();
-        }
-        BasicUI ui = new BasicUI(CELL_WIDTH, CELL_HEIGHT, board.getCells());
+        UIController ui = new UIController(CELL_WIDTH, CELL_HEIGHT, board.getCells());
         ui.initUi();
     }
 }

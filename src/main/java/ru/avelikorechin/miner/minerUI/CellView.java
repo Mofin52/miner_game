@@ -7,7 +7,7 @@ import javax.swing.JLabel;
  * @author Alexander Velikorechin
  * @since 19.11.2017
  */
-public class CellModel extends JLabel {
+public class CellView extends JLabel {
     /**
      * Row needed to detect cell.
      */

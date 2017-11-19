@@ -1,5 +1,6 @@
 package ru.avelikorechin.miner.minerUI;
 
+import ru.avelikorechin.miner.StartUI;
 import ru.avelikorechin.miner.cells.Cell;
 
 import javax.imageio.ImageIO;
@@ -16,11 +17,11 @@ import java.io.File;
 import java.io.IOException;
 
 /**
- * Interface for miner game.
+ * Contoller of interface for miner game.
  * @author Alexander Velikorechin
  * @since 18.11.2017
  */
-public class BasicUI {
+public class UIController {
 
     /**
      * Width of one cell.
@@ -37,18 +38,26 @@ public class BasicUI {
     /**
      * Storage of JLabels representing cells.
      */
-    private CellModel[][] cellsView;
+    private CellView[][] cellsView;
+    /**
+     * Numbers of flags set correctly.
+     */
+    private int correctFlags = 0;
+    /**
+     * Number of cells left.
+     */
+    private int cellsLeft = StartUI.CELLS_ON_BOARD;
     /**
      * Constructor of UI class.
      * @param cellWidth width of cell
      * @param cellHeight height of cell
      * @param cells cells array
      */
-    public BasicUI(final int cellWidth, final int cellHeight, final Cell[][] cells) {
+    public UIController(final int cellWidth, final int cellHeight, final Cell[][] cells) {
         this.cellWidth = cellWidth;
         this.cellHeight = cellHeight;
         this.cells = cells;
-        this.cellsView = new CellModel[cells.length][cells[0].length];
+        this.cellsView = new CellView[cells.length][cells[0].length];
     }
 
     /**
@@ -84,7 +93,7 @@ public class BasicUI {
                     e.printStackTrace();
                 }
 
-                CellModel label = new CellModel();
+                CellView label = new CellView();
                 label.setIcon(new ImageIcon(image));
                 label.setRow(i);
                 label.setColumn(j);
@@ -103,7 +112,7 @@ public class BasicUI {
      * @param content content of cell
      * @param cellView view of cell
      */
-    public void redrawCellImage(String state, String content, CellModel cellView) {
+    public void redrawCellImage(String state, String content, CellView cellView) {
         Image image = null;
         String imgPath = "src\\main\\java\\ru\\avelikorechin\\miner\\minerUI\\resources\\";
         String fileName = !state.equals("opened") ? state : state + content;
@@ -117,7 +126,7 @@ public class BasicUI {
     }
 
     /**
-     * Method invokes when we need to stop the game.
+     * Method invokes when we player fails to find the bombs.
      * First in opens all the cells
      * Then in removes mouse listener from their graphical model to make them inactive
      * Finally the message "Game over" is shown
@@ -125,28 +134,55 @@ public class BasicUI {
     public void gameOver() {
         for (Cell[] cellRow : cells) {
             for (Cell cell : cellRow) {
-                discloseCells(cell);
-                CellModel cellModel = cellsView[cell.getRow()][cell.getColumn()];
-                MouseListener listener = cellModel.getMouseListeners()[0];
-                cellModel.removeMouseListener(listener);
+                discloseCell(cell);
+                deactivateCell(cell);
             }
         }
-        JOptionPane.showMessageDialog(null, "Game Over");
+        showGameMessage("GAME OVER");
+    }
+
+    /**
+     * Method that is called when player wins the game.
+     */
+    public void gameWon() {
+        for (Cell[] cellRow : cells) {
+            for (Cell cell: cellRow) {
+                deactivateCell(cell);
+            }
+        }
+        showGameMessage("YOU DID IT! WELL DONE, BUDDY!");
     }
 
     /**
      * Method shows given cells.
      * @param cell cell to open
      */
-    private void discloseCells(final Cell cell) {
+    private void discloseCell(final Cell cell) {
         redrawCellImage("opened", cell.getContent(), cellsView[cell.getRow()][cell.getColumn()]);
     }
 
     /**
+     * Method removes action listener from given cell.
+     * @param cell cell to remove action listener from
+     */
+    private void deactivateCell(final Cell cell) {
+        CellView cellView = cellsView[cell.getRow()][cell.getColumn()];
+        MouseListener listener = cellView.getMouseListeners()[0];
+        cellView.removeMouseListener(listener);
+    }
+
+    /**
+     * Method shows message dialog with given message.
+     * @param message message to show
+     */
+    private void showGameMessage(final String message) {
+        JOptionPane.showMessageDialog(null, message);
+    }
+    /**
      * Getter for JLabels array.
      * @return array of JLabels
      */
-    public final CellModel[][] getCellsView() {
+    public final CellView[][] getCellsView() {
         return this.cellsView;
     }
     /**
@@ -156,4 +192,36 @@ public class BasicUI {
     public final Cell[][] getCells() {
         return this.cells;
     }
+
+    /**
+     * Getter for number of correct flags.
+     * @return
+     */
+    public final int getCorrectFlags() {
+        return this.correctFlags;
+    }
+
+    /**
+     * Setter for number of correct flags.
+     */
+    public final void setCorrectFlags(int newCorrectFlags) {
+        this.correctFlags = newCorrectFlags;
+    }
+
+    /**
+     * Getter for number of cells left on board unopened.
+     * @return number of cells left on board
+     */
+    public final int getCellsLeft() {
+        return this.cellsLeft;
+    }
+
+    /**
+     * Setter for number of cells left on board unopened.
+     * @param newCellsLeft new number of cells left on board
+     */
+    public final void setCellsLeft(int newCellsLeft) {
+        this.cellsLeft = newCellsLeft;
+    }
+
 }
