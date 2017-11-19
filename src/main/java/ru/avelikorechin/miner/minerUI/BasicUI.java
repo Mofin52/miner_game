@@ -4,11 +4,9 @@ import ru.avelikorechin.miner.cells.Cell;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
-import javax.swing.plaf.IconUIResource;
 import java.awt.*;
 import java.io.File;
 import java.io.IOException;
-import java.net.URL;
 
 /**
  * Interface for miner game.
@@ -42,7 +40,7 @@ public class BasicUI {
         this.cellWidth = cellWidth;
         this.cellHeight = cellHeight;
         this.cells = cells;
-        this.cellsView = new CellModel[cells[0].length][cells.length];
+        this.cellsView = new CellModel[cells.length][cells[0].length];
     }
 
     /**
@@ -80,7 +78,7 @@ public class BasicUI {
                 label.setIcon(new ImageIcon(image));
                 label.setRow(i);
                 label.setColumn(j);
-                label.setBounds(cellWidth*i,cellHeight*j,cellWidth,cellHeight);
+                label.setBounds(cellWidth*j,cellHeight*i,cellWidth,cellHeight);
                 label.setBackground(Color.BLACK);
                 label.setVisible(true);
                 label.addMouseListener(new ClicksListener(cells, this));

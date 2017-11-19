@@ -35,7 +35,7 @@ public class Board {
      * @param rows number of rows
      * @param bombQuantity number of bombs
      */
-    public Board(int columns, int rows, int bombQuantity){
+    public Board(int rows, int columns, int bombQuantity){
         this.rows = rows;
         this.columns = columns;
         this.bombQuantity = bombQuantity;

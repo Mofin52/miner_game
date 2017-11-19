@@ -1,39 +1,51 @@
 package ru.avelikorechin.miner.cellActions;
 
 import ru.avelikorechin.miner.cells.Cell;
+import ru.avelikorechin.miner.minerUI.BasicUI;
 
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Class to describe different cells actions.
+ * @author Alexander Velikorechin
+ * @since 11.11.2017
+ */
 public abstract class CellActions {
 
     /**
      * Action performed on right mouse button click.
      * @param cell cell clicked
      */
-    public void rightClickAction(Cell cell) {
+    public void rightClickAction(Cell cell, BasicUI ui) {
         String cellState = cell.getState();
         if (cellState.equals("hidden")) {
             cell.setState("flagged");
+            cellState = "flagged";
         } else if (cellState.equals("flagged")){
             cell.setState("hidden");
+            cellState = "hidden";
         } else {
             // should do nothing according to default game rules
         }
+        ui.getCellsView()[cell.getRow()][cell.getColumn()].redrawCellImage(cellState, cell.getContent());
     }
 
     /**
      * Action performed on left mouse button click.
      * @param cell cell clicked
+     * @param ui app ui
      * @param cells array of cells
      */
-    public void leftClickAction(Cell cell, Cell[][] cells) {
+    public void leftClickAction(Cell cell, BasicUI ui, Cell[][] cells) {
         String cellState = cell.getState();
         if (cellState.equals("hidden")) {
             cell.setState("opened");
+            cellState = "opened";
         } else {
             // should do nothing according to default game rules
         }
+        ui.getCellsView()[cell.getRow()][cell.getColumn()].redrawCellImage(cellState, cell.getContent());
     }
 
     /**
@@ -45,7 +57,6 @@ public abstract class CellActions {
         int row = cell.getRow();
         int col = cell.getColumn();
         List<Cell> result = new ArrayList<Cell>();
-
         for (int i = -1; i <= 1 ; i++){
             for (int j = -1; j <= 1; j++){
                 if (i ==0 && j == 0) {
@@ -74,43 +85,4 @@ public abstract class CellActions {
         return hiddenCellsAround;
     }
 
-    /**
-     * Returns lisf of flagged cells around given one.
-     * @param cell
-     * @param cells
-     * @return
-     */
-    public List<Cell> getFlaggedCellsAround(Cell cell, Cell[][] cells) {
-        List<Cell> flaggedCellsAround = getCellsAround(cell, cells);
-        flaggedCellsAround.removeIf(c -> !c.getState().equals("flagged"));
-        return flaggedCellsAround;
-    }
-
-    /**
-     * Method change cells status to pushed.
-     * @param cellsToPush list of cells to push down
-     */
-    public void pushCells(List<Cell> cellsToPush) {
-        for (Cell item : cellsToPush) {
-            item.setState("pushed");
-        }
-    }
-
-    /**
-     * Method change cells status to hidden.
-     * @param cellsToRelease list of cells to release
-     */
-    public void releaseCells(List<Cell> cellsToRelease) {
-        for (Cell item : cellsToRelease) {
-            if (item.getState().equals("pushed")) {
-                item.setState("hidden");
-            }
-        }
-    }
-    /**
-     * Action performed on both mouse button click.
-     * @param cell cell clicked
-     * @param cells array of cells
-     */
-    abstract void leftRightClickAction(Cell cell, Cell[][] cells);
 }

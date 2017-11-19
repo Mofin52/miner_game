@@ -6,7 +6,9 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
 /**
- * Created by Alex on 11/18/2017.
+ * Class of click listener for board ui.
+ * @author Alexander Velikorechin
+ * @since 15.11.2017
  */
 public class ClicksListener implements MouseListener {
     /**
@@ -34,13 +36,11 @@ public class ClicksListener implements MouseListener {
         CellModel objectClicked = (CellModel) mouseEvent.getSource();
         Cell cellClicked = cells[objectClicked.getRow()][objectClicked.getColumn()];
         int buttonClicked = mouseEvent.getButton();
-        System.out.println(buttonClicked);
         if(buttonClicked == 1) {
-            cellClicked.getActionLibrary().leftClickAction(cellClicked, cells);
+            cellClicked.getActionLibrary().leftClickAction(cellClicked, this.ui, cells);
         } else if (buttonClicked == 3) {
-            cellClicked.getActionLibrary().rightClickAction(cellClicked);
+            cellClicked.getActionLibrary().rightClickAction(cellClicked, this.ui);
         }
-        objectClicked.redrawCellImage(cellClicked.getState(), cellClicked.getContent());
     }
 
     /**

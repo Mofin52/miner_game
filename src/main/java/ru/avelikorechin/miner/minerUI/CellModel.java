@@ -30,7 +30,6 @@ public class CellModel extends JLabel {
         String fileName = !state.equals("opened") ? state : state + content;
         try {
             File url = new File("src\\main\\java\\ru\\avelikorechin\\miner\\minerUI\\resources\\" + fileName + ".png");
-            System.out.println(url.toString());
             image = ImageIO.read(url);
         } catch (IOException e) {
             e.printStackTrace();
