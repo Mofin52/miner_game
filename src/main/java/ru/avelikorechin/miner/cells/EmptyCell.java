@@ -13,7 +13,7 @@ public class EmptyCell extends Cell {
     /**
      * Bomb action lib.
      */
-    private CellActions cellActions = new EmptyActions();
+    private CellActions actionLibrary;
     /**
      * Constructor of cell.
      * @param column column of cell on board
@@ -21,6 +21,7 @@ public class EmptyCell extends Cell {
      */
     public EmptyCell(int row, int column) {
         super(row, column);
-        this.content = " ";
+        this.content = "";
+        super.actionLibrary = new EmptyActions();
     }
 }

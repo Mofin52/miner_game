@@ -13,7 +13,7 @@ public class BombCell extends Cell {
     /**
      * Bomb action lib.
      */
-    private CellActions cellActions = new BombActions();
+    private CellActions actionLibrary;
 
     /**
      * Constructor of cell.
@@ -22,6 +22,8 @@ public class BombCell extends Cell {
      */
     public BombCell(int row, int column) {
         super(row, column);
-        this.content = "*";
+        this.content = "B";
+        super.actionLibrary = new BombActions();
     }
+
 }

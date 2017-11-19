@@ -15,12 +15,19 @@ public class EmptyActions extends CellActions {
      */
     @Override
     public void leftClickAction(Cell cell, Cell[][] cells) {
+        //TODO check method work
         String cellState = cell.getState();
         if (cellState.equals("hidden")) {
             List<Cell> cellsAround = getHiddenCellsAround(cell, cells);
             for (Cell elem : cellsAround) {
                 if (elem instanceof EmptyCell) {
-                    leftClickAction(elem, cells);
+                    elem.setState("opened");
+                    List<Cell> cellsAroundOpened = getHiddenCellsAround(cell, cells);
+                    for (Cell nextElem : cellsAroundOpened) {
+                        if (nextElem instanceof EmptyCell) {
+                            leftClickAction(nextElem, cells);
+                        }
+                    }
                 } else {
                     elem.setState("opened");
                 }

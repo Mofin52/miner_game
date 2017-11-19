@@ -48,6 +48,9 @@ public abstract class CellActions {
 
         for (int i = -1; i <= 1 ; i++){
             for (int j = -1; j <= 1; j++){
+                if (i ==0 && j == 0) {
+                    continue;
+                }
                 int shiftedRow = row + i;
                 int shiftedCol = col + j;
                 if (shiftedCol >= 0 && shiftedCol < cells[0].length

@@ -29,7 +29,10 @@ public class BasicUI {
      * Cells for UI.
      */
     private Cell[][] cells;
-
+    /**
+     * Storage of JLabels representing cells.
+     */
+    private CellModel[][] cellsView;
     /**
      * Constructor of UI class.
      * @param cellWidth width of cell
@@ -39,6 +42,7 @@ public class BasicUI {
         this.cellWidth = cellWidth;
         this.cellHeight = cellHeight;
         this.cells = cells;
+        this.cellsView = new CellModel[cells[0].length][cells.length];
     }
 
     /**
@@ -57,6 +61,10 @@ public class BasicUI {
 
     }
 
+    /**
+     * Method to draw cells on frame.
+     * @param frame frame where to add cells
+     */
     private void drawFrame(JFrame frame){
         for (int i = 0; i < cells.length; i++) {
             for (int j = 0; j < cells[i].length; j++) {
@@ -68,12 +76,25 @@ public class BasicUI {
                     e.printStackTrace();
                 }
 
-                JLabel label = new JLabel(new ImageIcon(image));
-                label.setBounds(cellWidth*j,cellHeight*i,cellWidth,cellHeight);
+                CellModel label = new CellModel();
+                label.setIcon(new ImageIcon(image));
+                label.setRow(i);
+                label.setColumn(j);
+                label.setBounds(cellWidth*i,cellHeight*j,cellWidth,cellHeight);
                 label.setBackground(Color.BLACK);
                 label.setVisible(true);
+                label.addMouseListener(new ClicksListener(cells, this));
                 frame.getContentPane().add(label);
+                this.cellsView[i][j] = label;
             }
         }
+    }
+
+    /**
+     * Getter for JLabels array.
+     * @return array of JLabels
+     */
+    public CellModel[][] getCellsView () {
+        return this.cellsView;
     }
 }
