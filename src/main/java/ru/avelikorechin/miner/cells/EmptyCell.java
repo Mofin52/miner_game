@@ -1,6 +1,5 @@
 package ru.avelikorechin.miner.cells;
 
-import ru.avelikorechin.miner.cellActions.CellActions;
 import ru.avelikorechin.miner.cellActions.EmptyActions;
 
 /**
@@ -11,17 +10,13 @@ import ru.avelikorechin.miner.cellActions.EmptyActions;
 
 public class EmptyCell extends Cell {
     /**
-     * Bomb action lib.
-     */
-    private CellActions actionLibrary;
-    /**
      * Constructor of cell.
      * @param column column of cell on board
      * @param row row of cell on board
      */
-    public EmptyCell(int row, int column) {
+    public EmptyCell(final int row, final int column) {
         super(row, column);
-        this.content = "";
-        super.actionLibrary = new EmptyActions();
+        super.setContent("");
+        super.setActionLibrary(new EmptyActions());
     }
 }

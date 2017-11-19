@@ -35,7 +35,7 @@ public class Board {
      * @param rows number of rows
      * @param bombQuantity number of bombs
      */
-    public Board(int rows, int columns, int bombQuantity){
+    public Board(final int rows, final int columns, final int bombQuantity) {
         this.rows = rows;
         this.columns = columns;
         this.bombQuantity = bombQuantity;
@@ -45,11 +45,11 @@ public class Board {
     /**
      * Method fills board with cells on game startup.
      */
-    public void fillBoard(){
+    public void fillBoard() {
         Cell[] bombCoords = new Cell[bombQuantity];
-        for (int i = 0; i < bombQuantity; ) {
-            int rowNum = (int) Math.round(Math.random()*(rows - 1));
-            int colNum = (int) Math.round(Math.random()*(columns - 1));
+        for (int i = 0; i < bombQuantity;) {
+            int rowNum = (int) Math.round(Math.random() * (rows - 1));
+            int colNum = (int) Math.round(Math.random() * (columns - 1));
             if (cells[rowNum][colNum] == null) {
                 cells[rowNum][colNum] = new BombCell(rowNum, colNum);
                 bombCoords[i] = cells[rowNum][colNum];
@@ -62,11 +62,12 @@ public class Board {
 
     /**
      * Method puts numbers describing bomb quantity placed near them.
+     * @param bombCoords array with coordinates of bomb on the board
      */
-    public void fillNumbers(Cell[] bombCoords){
-        for (Cell bomb : bombCoords){
-            for (int i = -1; i <= 1 ; i++){
-                for (int j = -1; j <=1; j++){
+    public void fillNumbers(final Cell[] bombCoords) {
+        for (Cell bomb : bombCoords) {
+            for (int i = -1; i <= 1; i++) {
+                for (int j = -1; j <= 1; j++) {
 
                     int shiftedRow = bomb.getRow() + i;
                     int shiftedCol = bomb.getColumn() + j;
@@ -86,8 +87,8 @@ public class Board {
     /**
      * Method fills all the cells that do not have numbers and bombs with empty cells.
      */
-    public void fillEmpty(){
-        for (int i = 0; i < rows; i++){
+    public void fillEmpty() {
+        for (int i = 0; i < rows; i++) {
             for (int j = 0; j < columns; j++) {
                 if (cells[i][j] == null) {
                     cells[i][j] = new EmptyCell(i, j);
@@ -100,12 +101,12 @@ public class Board {
      * Method counts bomb around particular cell.
      * @param row row of cell to count around
      * @param col column of cell to count around
-     * @return
+     * @return integer equals to quantity bombs around the given one
      */
-    private String countBombsAround(int row, int col) {
+    private String countBombsAround(final int row, final int col) {
         int counter = 0;
-        for (int i = -1; i <= 1 ; i++){
-            for (int j = -1; j <= 1; j++){
+        for (int i = -1; i <= 1; i++) {
+            for (int j = -1; j <= 1; j++) {
                 int shiftedRow = row + i;
                 int shiftedCol = col + j;
                 if (shiftedCol >= 0 && shiftedCol < columns
@@ -118,8 +119,11 @@ public class Board {
         return Integer.toString(counter);
     }
 
-
-    public Cell[][] getCells(){
+    /**
+     * Getter for cells array.
+     * @return array of cells placed on board
+     */
+    public final Cell[][] getCells() {
         return this.cells;
     }
 }

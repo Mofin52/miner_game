@@ -1,3 +1,4 @@
+
 package ru.avelikorechin.miner.cells;
 
 import ru.avelikorechin.miner.cellActions.CellActions;
@@ -13,29 +14,29 @@ public abstract class Cell {
     /**
      * Column of cell on board.
      */
-    int column;
+    private int column;
     /**
      * Row of cell on board.
      */
-    int row;
+    private int row;
     /**
      * Status of cell. May be hidden, pushed, opened or flagged.
      */
-    String state;
+    private String state;
     /**
      * Content of cell.
      */
-    String content;
+    private String content;
     /**
      * Cell actions library.
      */
-    CellActions actionLibrary;
+    private CellActions actionLibrary;
     /**
      * Constructor for empty cell.
      * @param column column of cell on board
      * @param row row of cell on board
      */
-    public Cell(int row, int column) {
+    public Cell(final int row, final int column) {
         this.column = column;
         this.row = row;
         this.state = "hidden";
@@ -45,7 +46,7 @@ public abstract class Cell {
      * Returns cell state - 'opened' or 'hidden' or 'flagged'.
      * @return cell state
      */
-    public String getState() {
+    public final String getState() {
         return this.state;
     }
 
@@ -53,7 +54,7 @@ public abstract class Cell {
      * Sets cell state - 'opened' or 'hidden' or 'flagged'.
      * @param newState cell state
      */
-    public void setState(String newState) {
+    public final void setState(final String newState) {
         this.state = newState;
     }
 
@@ -61,55 +62,38 @@ public abstract class Cell {
      * Returns column of cell on board.
      * @return column of cell
      */
-    public int getColumn() {
+    public final int getColumn() {
         return this.column;
-    }
-
-    /**
-     * Sets column of cell on board.
-     * @param newColumn column of cell
-     */
-    public void setColumn(int newColumn) {
-        this.column = newColumn;
     }
 
     /**
      * Returns row of cell on board.
      * @return row of cell
      */
-    public int getRow() {
+    public final int getRow() {
         return this.row;
-    }
-
-    /**
-     * Sets row of cell on board.
-     * @param newRow row of cell
-     */
-    public void setRow(int newRow) {
-        this.row = newRow;
     }
 
     /**
      * Returns content of cell.
      * @return content of cell
      */
-    public String getContent(){
+    public final String getContent() {
         return this.content;
     }
 
     /**
-     * Sets content of cell.
-     * @param content content of cell
+     * Setter for content.
+     * @param newContent content to set
      */
-    public void setContent(String content){
-        this.content = content;
+    public final void setContent(final String newContent) {
+        this.content = newContent;
     }
-
     /**
      * Returns current actionLibrary.
      * @return action library
      */
-    public CellActions getActionLibrary () {
+    public final CellActions getActionLibrary() {
         return this.actionLibrary;
     }
 
@@ -117,7 +101,7 @@ public abstract class Cell {
      * Sets new actionLibrary.
      * @param acts action library
      */
-    public void setActionLibrary (CellActions acts) {
+    public final void setActionLibrary(final CellActions acts) {
         this.actionLibrary = acts;
     }
 

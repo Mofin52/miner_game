@@ -17,10 +17,18 @@ public class ClicksListener implements MouseListener {
      */
     private BasicUI ui;
     /**
+     * Constant for left mouse button.
+     */
+    private static final int LMB = 1;
+    /**
+     * Constant for right mouse button.
+     */
+    private static final int RMB = 3;
+    /**
      * Constructor for clicksListener.
      * @param ui cell views required for click library work
      */
-    public ClicksListener(BasicUI ui) {
+    public ClicksListener(final BasicUI ui) {
         this.ui = ui;
     }
     /**
@@ -28,13 +36,13 @@ public class ClicksListener implements MouseListener {
      * @param mouseEvent event happened
      */
     @Override
-    public void mouseClicked(MouseEvent mouseEvent) {
+    public final void mouseClicked(final MouseEvent mouseEvent) {
         CellModel objectClicked = (CellModel) mouseEvent.getSource();
         Cell cellClicked = ui.getCells()[objectClicked.getRow()][objectClicked.getColumn()];
         int buttonClicked = mouseEvent.getButton();
-        if(buttonClicked == 1) {
+        if (buttonClicked == LMB) {
             cellClicked.getActionLibrary().leftClickAction(cellClicked, this.ui);
-        } else if (buttonClicked == 3) {
+        } else if (buttonClicked == RMB) {
             cellClicked.getActionLibrary().rightClickAction(cellClicked, this.ui);
         }
     }
@@ -44,7 +52,7 @@ public class ClicksListener implements MouseListener {
      * @param mouseEvent event happened
      */
     @Override
-    public void mousePressed(MouseEvent mouseEvent) {
+    public void mousePressed(final MouseEvent mouseEvent) {
 
     }
 
@@ -53,7 +61,7 @@ public class ClicksListener implements MouseListener {
      * @param mouseEvent event happened
      */
     @Override
-    public void mouseReleased(MouseEvent mouseEvent) {
+    public void mouseReleased(final MouseEvent mouseEvent) {
 
     }
 
@@ -62,7 +70,7 @@ public class ClicksListener implements MouseListener {
      * @param mouseEvent event happened
      */
     @Override
-    public void mouseEntered(MouseEvent mouseEvent) {
+    public void mouseEntered(final MouseEvent mouseEvent) {
 
     }
 
@@ -71,7 +79,7 @@ public class ClicksListener implements MouseListener {
      * @param mouseEvent event happened
      */
     @Override
-    public void mouseExited(MouseEvent mouseEvent) {
+    public void mouseExited(final MouseEvent mouseEvent) {
 
     }
 }

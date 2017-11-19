@@ -11,19 +11,14 @@ import ru.avelikorechin.miner.cellActions.CellActions;
 
 public class BombCell extends Cell {
     /**
-     * Bomb action lib.
-     */
-    private CellActions actionLibrary;
-
-    /**
      * Constructor of cell.
      * @param column column of cell on board
      * @param row row of cell on board
      */
-    public BombCell(int row, int column) {
+    public BombCell(final int row, final int column) {
         super(row, column);
-        this.content = "B";
-        super.actionLibrary = new BombActions();
+        super.setContent("B");
+        super.setActionLibrary(new BombActions());
     }
 
 }

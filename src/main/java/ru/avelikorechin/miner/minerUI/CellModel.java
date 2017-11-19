@@ -1,10 +1,6 @@
 package ru.avelikorechin.miner.minerUI;
 
-import javax.imageio.ImageIO;
-import javax.swing.*;
-import java.awt.*;
-import java.io.File;
-import java.io.IOException;
+import javax.swing.JLabel;
 
 /**
  * Model of Cell based on JLabel.
@@ -21,26 +17,12 @@ public class CellModel extends JLabel {
      */
     private int column;
 
-    /**
-     * Method to redraw cell icon.
-     * @param state new state of cell
-     */
-    public void redrawCellImage(String state, String content) {
-        Image image = null;
-        String fileName = !state.equals("opened") ? state : state + content;
-        try {
-            File url = new File("src\\main\\java\\ru\\avelikorechin\\miner\\minerUI\\resources\\" + fileName + ".png");
-            image = ImageIO.read(url);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        this.setIcon(new ImageIcon(image));
-    }
+
     /**
      * Returns row.
      * @return row
      */
-    public int getRow() {
+    public final int getRow() {
         return this.row;
     }
 
@@ -48,7 +30,7 @@ public class CellModel extends JLabel {
      * Returns column.
      * @return column
      */
-    public int getColumn() {
+    public final int getColumn() {
         return this.column;
     }
 
@@ -56,7 +38,7 @@ public class CellModel extends JLabel {
      * Sets row.
      * @param newRow row to set
      */
-    public void setRow(int newRow) {
+    public final void setRow(final int newRow) {
         this.row = newRow;
     }
 
@@ -64,7 +46,7 @@ public class CellModel extends JLabel {
      * Sets column.
      * @param newColumn column to set
      */
-    public void setColumn(int newColumn) {
+    public final void setColumn(final int newColumn) {
         this.column = newColumn;
     }
 }

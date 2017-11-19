@@ -22,12 +22,14 @@ public class EmptyActions extends CellActions {
      * @param ui ui of app
      */
     @Override
-    public void leftClickAction(Cell cell, BasicUI ui) {
+    public final void leftClickAction(final Cell cell, final BasicUI ui) {
         //TODO check method work
         String cellState = cell.getState();
         if (cellState.equals("hidden")) {
             cell.setState("opened");
-            ui.getCellsView()[cell.getRow()][cell.getColumn()].redrawCellImage("opened", cell.getContent());
+            ui.redrawCellImage("opened",
+                    cell.getContent(),
+                    ui.getCellsView()[cell.getRow()][cell.getColumn()]);
             List<Cell> cellsAround = getHiddenCellsAround(cell, ui.getCells());
             for (Cell elem : cellsAround) {
                 if (elem instanceof EmptyCell) {
@@ -37,8 +39,6 @@ public class EmptyActions extends CellActions {
                 }
             }
 
-        } else {
-            // opened and flagged cell shouldn't react on such action by default
         }
     }
 

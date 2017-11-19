@@ -10,29 +10,27 @@ import ru.avelikorechin.miner.cellActions.NumberActions;
  */
 
 public class NumberCell extends Cell {
-    /**
-     * Bomb action lib.
-     */
-    private CellActions actionLibrary;
+
     /**
      * Constructor of cell.
      * @param column column of cell on board
      * @param row row of cell on board
      */
-    public NumberCell(int row, int column) {
+    public NumberCell(final int row, final int column) {
         super(row, column);
-        this.content = "0";
-        super.actionLibrary = new NumberActions();
+        super.setContent("0");
+        super.setActionLibrary(new NumberActions());
     }
 
     /**
      * Constructor of cell with content assignment.
      * @param column column of cell on board
      * @param row row of cell on board
+     * @param content content of cell
      */
-    public NumberCell(int row, int column, String content) {
+    public NumberCell(final int row, final int column, final String content) {
         super(row, column);
-        this.content = content;
-        super.actionLibrary = new NumberActions();
+        super.setContent(content);
+        super.setActionLibrary(new NumberActions());
     }
 }
