@@ -140,11 +140,17 @@ public class UIController {
         }
         showGameMessage("GAME OVER");
     }
-
+    /**
+     * Checks whether game is won or not.*/
+    public void isGameWon() {
+        if (cellsLeft == StartUI.BOMBS || correctFlags == StartUI.BOMBS) {
+            gameWon();
+        }
+    }
     /**
      * Method that is called when player wins the game.
      */
-    public void gameWon() {
+    private void gameWon() {
         for (Cell[] cellRow : cells) {
             for (Cell cell: cellRow) {
                 deactivateCell(cell);
@@ -170,7 +176,13 @@ public class UIController {
         MouseListener listener = cellView.getMouseListeners()[0];
         cellView.removeMouseListener(listener);
     }
-
+    /**
+     * Method changes ammount of flags set correctly.
+     * @param delta +1 or -1
+     */
+    public void changeControlCellsCount(final int delta) {
+        correctFlags += delta;
+    }
     /**
      * Method shows message dialog with given message.
      * @param message message to show
@@ -191,21 +203,6 @@ public class UIController {
      */
     public final Cell[][] getCells() {
         return this.cells;
-    }
-
-    /**
-     * Getter for number of correct flags.
-     * @return
-     */
-    public final int getCorrectFlags() {
-        return this.correctFlags;
-    }
-
-    /**
-     * Setter for number of correct flags.
-     */
-    public final void setCorrectFlags(int newCorrectFlags) {
-        this.correctFlags = newCorrectFlags;
     }
 
     /**

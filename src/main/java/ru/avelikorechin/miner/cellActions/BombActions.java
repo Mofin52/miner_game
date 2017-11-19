@@ -27,35 +27,14 @@ public class BombActions extends CellActions {
         if (cellState.equals("hidden")) {
             cellState = "flagged";
             cell.setState(cellState);
-            changeControlCellsCount(+1, ui);
+            ui.changeControlCellsCount(+1);
             ui.redrawCellImage(cellState, cell.getContent(), ui.getCellsView()[cell.getRow()][cell.getColumn()]);
         } else if (cellState.equals("flagged")) {
             cellState = "hidden";
             cell.setState(cellState);
-            changeControlCellsCount(-1, ui);
+            ui.changeControlCellsCount(-1);
             ui.redrawCellImage(cellState, cell.getContent(), ui.getCellsView()[cell.getRow()][cell.getColumn()]);
         }
-        isGameWon(ui);
-    }
-
-    /**
-     * Method changes ammount of flags set correctly.
-      * @param delta +1 or -1
-     * @param ui user interface of app
-     */
-    @Override
-    protected void changeControlCellsCount(final int delta, final UIController ui) {
-        ui.setCorrectFlags(ui.getCorrectFlags() + delta);
-    }
-
-    /**
-     * Checks whether game is won or not.
-     * @param ui ui of an app
-     */
-    @Override
-    protected void isGameWon(final UIController ui) {
-        if (ui.getCorrectFlags() == StartUI.BOMBS) {
-            ui.gameWon();
-        }
+        ui.isGameWon();
     }
 }

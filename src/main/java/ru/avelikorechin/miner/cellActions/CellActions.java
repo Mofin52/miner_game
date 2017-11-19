@@ -44,9 +44,8 @@ public abstract class CellActions {
             cellState = "opened";
             ui.redrawCellImage(cellState, cell.getContent(), ui.getCellsView()[cell.getRow()][cell.getColumn()]);
             ui.setCellsLeft(ui.getCellsLeft() - 1);
-            System.out.println(ui.getCellsLeft());
         }
-        isGameWon(ui);
+        ui.isGameWon();
     }
 
     /**
@@ -85,25 +84,6 @@ public abstract class CellActions {
         List<Cell> hiddenCellsAround = getCellsAround(cell, cells);
         hiddenCellsAround.removeIf(c -> !c.getState().equals("hidden"));
         return hiddenCellsAround;
-    }
-
-    /**
-     * Method changes ammount of flags set correctly.
-     * @param delta +1 or -1
-     * @param ui user interface of app
-     */
-    protected void changeControlCellsCount(final int delta, final UIController ui) {
-        ui.setCorrectFlags(ui.getCorrectFlags() + delta);
-    }
-
-    /**
-     * Checks whether game is won or not.
-     * @param ui ui of an app
-     */
-    protected void isGameWon(final UIController ui) {
-        if (ui.getCellsLeft() == StartUI.BOMBS) {
-            ui.gameWon();
-        }
     }
 
 }

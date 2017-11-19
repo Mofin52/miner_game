@@ -39,7 +39,7 @@ public class EmptyActions extends CellActions {
                 }
             }
         }
-        isGameWon(ui);
+        ui.isGameWon();
     }
 
 }

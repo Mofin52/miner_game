@@ -64,7 +64,7 @@ public class Board {
      * Method puts numbers describing bomb quantity placed near them.
      * @param bombCoords array with coordinates of bomb on the board
      */
-    public void fillNumbers(final Cell[] bombCoords) {
+    private void fillNumbers(final Cell[] bombCoords) {
         for (Cell bomb : bombCoords) {
             for (int i = -1; i <= 1; i++) {
                 for (int j = -1; j <= 1; j++) {
@@ -87,7 +87,7 @@ public class Board {
     /**
      * Method fills all the cells that do not have numbers and bombs with empty cells.
      */
-    public void fillEmpty() {
+    private void fillEmpty() {
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < columns; j++) {
                 if (cells[i][j] == null) {

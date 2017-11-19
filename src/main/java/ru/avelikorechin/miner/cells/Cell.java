@@ -86,7 +86,7 @@ public abstract class Cell {
      * Setter for content.
      * @param newContent content to set
      */
-    public final void setContent(final String newContent) {
+    protected final void setContent(final String newContent) {
         this.content = newContent;
     }
     /**
